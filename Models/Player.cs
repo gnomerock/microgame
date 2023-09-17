@@ -10,26 +10,47 @@ public class Player
   }
   public long Id { get; set; }
   public string? Name { get; set;}
-  private int? MaxHealthPoint { get; set;}
-  private int? CurrentHealthPoint { get; set;}
-  private int? AttackPoint { get; set;}
-  private int? DefensePoint { get; set;}
+  public int MaxHealthPoint { get; set;}
+  public int CurrentHealthPoint { get; set;}
+  public int AttackPoint { get; set;}
+  public int DefensePoint { get; set;}
 
   private Equipment? Weapon { get; set;}
+  private Equipment? Armor { get; set;}
 
   public string getCurrentHP() {
-    return Name+" HP: "+CurrentHealthPoint.ToString()+"/"+MaxHealthPoint.ToString();
+    return Name+" HP: "+CurrentHealthPoint.ToString()+"/"+MaxHealthPoint.ToString()+" AP: "+getAP()+" DP: "+getDP();
   }
 
-  public int? getAP() {
-    return AttackPoint;
+  public int getAP() {
+    if(Weapon != null) {
+      return Weapon.AttackPoint+AttackPoint;
+    }else{
+      return AttackPoint;
+    }
   }
 
-  public int? getDP() {
-    return DefensePoint;
+  public int getDP() {
+    if(Armor != null) {
+      return Armor.DefensePoint+DefensePoint;
+    }else{
+      return DefensePoint;
+    }
+  }
+
+  public void equipWeapon(Equipment weapon) {
+    Weapon = weapon;
+  }
+
+  public void equipArmor(Equipment armor) {
+    Armor = armor;
   }
 
   public Equipment? getEquipedWeapon() {
     return Weapon;
+  }
+
+  public bool isDead() {
+    return CurrentHealthPoint == 0;
   }
 }

@@ -132,6 +132,23 @@ namespace microgame.Controllers
             return player.getCurrentHP();
         }
 
+        [HttpGet("{id}/attackedby/{enemyId}")]
+        public async Task<ActionResult<Player>> GetAttackedBy(long id, long monsterId)
+        {
+            if (_context.Players == null)
+            {
+                return NotFound();
+            }
+            var player = await _context.Players.FindAsync(id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return player;
+        }
+
         private bool PlayerExists(long id)
         {
             return (_context.Players?.Any(e => e.Id == id)).GetValueOrDefault();
