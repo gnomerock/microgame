@@ -28,7 +28,10 @@ namespace microgame.Controllers
           {
               return NotFound();
           }
-            return await _context.Players.ToListAsync();
+            return await _context.Players
+                .Include(player => player.Weapon)
+                .Include(player => player.Armor)
+                .ToListAsync();
         }
 
         // GET: api/Players/5
@@ -39,7 +42,11 @@ namespace microgame.Controllers
           {
               return NotFound();
           }
-            var player = await _context.Players.FindAsync(id);
+            var player = await _context.Players
+                .Include(player => player.Weapon)
+                .Include(player => player.Armor)
+                .FirstOrDefaultAsync(player => player.Id == id);
+
 
             if (player == null)
             {
@@ -122,7 +129,10 @@ namespace microgame.Controllers
             {
                 return NotFound();
             }
-            var player = await _context.Players.FindAsync(id);
+            var player = await _context.Players
+                .Include(player => player.Weapon)
+                .Include(player => player.Armor)
+                .FirstOrDefaultAsync(player => player.Id == id);
 
             if (player == null)
             {
@@ -167,6 +177,37 @@ namespace microgame.Controllers
             } else {
                 return "[+] "+player.Name+" attacked by "+enemy.Name+" : no effect!";
             }
+        }
+
+        [HttpGet("{id}/equipweapon/{equipmentId}")]
+        public async Task<ActionResult<String>> EquipWeapon(long id, long equipmentId)
+        {
+
+            var player = await _context.Players.FindAsync(id);
+            var equipment = await _context.Equipments.FindAsync(equipmentId);
+
+            if (player == null)
+            {
+                return NotFound("Player not found.");
+            }
+            if (equipment == null)
+            {
+                return NotFound("Equipment not found.");
+            }
+
+            var damage = equipment.AttackPoint - player.getDP();
+
+            player.equipWeapon(equipment);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.InnerException?.Message);
+                return Problem(ex.InnerException?.Message);
+            }
+            return "[+]" + player.Name + " equip " + equipment.Name + " Current AP: " + player.getAP();
         }
 
         private bool PlayerExists(long id)
