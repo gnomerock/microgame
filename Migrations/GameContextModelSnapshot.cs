@@ -68,18 +68,6 @@ namespace microgame.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AttackPoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CurrentHealthPoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DefensePoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MaxHealthPoint")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 

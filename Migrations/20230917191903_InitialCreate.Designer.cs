@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace microgame.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20230917191423_InitialCreate")]
+    [Migration("20230917191903_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -69,18 +69,6 @@ namespace microgame.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AttackPoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CurrentHealthPoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DefensePoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MaxHealthPoint")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

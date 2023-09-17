@@ -10,10 +10,10 @@ public class Player
   }
   public long Id { get; set; }
   public string? Name { get; set;}
-  public int MaxHealthPoint { get; set;}
-  public int CurrentHealthPoint { get; set;}
-  public int AttackPoint { get; set;}
-  public int DefensePoint { get; set;}
+  private int MaxHealthPoint { get; set;}
+  private int CurrentHealthPoint { get; set;}
+  private int AttackPoint { get; set;}
+  private int DefensePoint { get; set;}
 
   private Equipment? Weapon { get; set;}
   private Equipment? Armor { get; set;}

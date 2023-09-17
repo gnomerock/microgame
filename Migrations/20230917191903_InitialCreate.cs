@@ -48,11 +48,7 @@ namespace microgame.Migrations
                 {
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    MaxHealthPoint = table.Column<int>(type: "INTEGER", nullable: false),
-                    CurrentHealthPoint = table.Column<int>(type: "INTEGER", nullable: false),
-                    AttackPoint = table.Column<int>(type: "INTEGER", nullable: false),
-                    DefensePoint = table.Column<int>(type: "INTEGER", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
