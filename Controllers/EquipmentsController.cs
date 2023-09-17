@@ -13,9 +13,9 @@ namespace microgame.Controllers
     [ApiController]
     public class EquipmentsController : ControllerBase
     {
-        private readonly EquipmentContext _context;
+        private readonly GameContext _context;
 
-        public EquipmentsController(EquipmentContext context)
+        public EquipmentsController(GameContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace microgame.Controllers
         {
           if (_context.Equipments == null)
           {
-              return Problem("Entity set 'EquipmentContext.Equipments'  is null.");
+              return Problem("Entity set 'GameContext.Equipments'  is null.");
           }
             _context.Equipments.Add(equipment);
             await _context.SaveChangesAsync();

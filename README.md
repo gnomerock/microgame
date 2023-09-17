@@ -5,7 +5,7 @@
 `docker run -it --rm -p 3000:80 --name [containername] microgame`
 
 # scaffolding controllers sample
-`dotnet aspnet-codegenerator controller -name PlayersController -async -api -m Player -dc PlayerContext -outDir Controllers`
+`dotnet aspnet-codegenerator controller -name PlayersController -async -api -m Player -dc GameContext -outDir Controllers`
 
 # initial&migrate db
 1. `dotnet tool install --global dotnet-ef`

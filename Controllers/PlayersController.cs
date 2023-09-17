@@ -13,9 +13,9 @@ namespace microgame.Controllers
     [ApiController]
     public class PlayersController : ControllerBase
     {
-        private readonly PlayerContext _context;
+        private readonly GameContext _context;
 
-        public PlayersController(PlayerContext context)
+        public PlayersController(GameContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace microgame.Controllers
         {
           if (_context.Players == null)
           {
-              return Problem("Entity set 'PlayerContext.Players'  is null.");
+              return Problem("Entity set 'GameContext.Players'  is null.");
           }
             _context.Players.Add(player);
             await _context.SaveChangesAsync();

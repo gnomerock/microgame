@@ -13,9 +13,9 @@ namespace microgame.Controllers
     [ApiController]
     public class EnemiesController : ControllerBase
     {
-        private readonly EnemyContext _context;
+        private readonly GameContext _context;
 
-        public EnemiesController(EnemyContext context)
+        public EnemiesController(GameContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace microgame.Controllers
         {
           if (_context.Enemies == null)
           {
-              return Problem("Entity set 'EnemyContext.Enemies'  is null.");
+              return Problem("Entity set 'GameContext.Enemies'  is null.");
           }
             _context.Enemies.Add(enemy);
             await _context.SaveChangesAsync();

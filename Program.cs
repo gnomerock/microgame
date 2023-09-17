@@ -8,12 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 //sqlite 
-builder.Services.AddDbContext<PlayerContext>(options =>
+builder.Services.AddDbContext<GameContext>(options =>
      options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<EnemyContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<EquipmentContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
     
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
