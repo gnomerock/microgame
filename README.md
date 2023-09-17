@@ -1,9 +1,10 @@
 # running as development
-`dotnet run`
+1. `dotnet restore`
+2. `dotnet run`
 
 # running on docker
-`docker build -t microgame -f Dockerfile .`
-`docker run -it --rm -p 3000:80 --name [containername] microgame`
+1. `docker build -t microgame -f Dockerfile .`
+2. `docker run -it --rm -p 3000:80 --name [containername] microgame`
 
 # scaffolding controllers sample
 `dotnet aspnet-codegenerator controller -name PlayersController -async -api -m Player -dc GameContext -outDir Controllers`
