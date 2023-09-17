@@ -3,6 +3,7 @@ using System;
 using Microgame.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace microgame.Migrations
 {
     [DbContext(typeof(GameContext))]
-    partial class GameContextModelSnapshot : ModelSnapshot
+    [Migration("20230917202728_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
@@ -70,18 +73,6 @@ namespace microgame.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<long?>("ArmorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AttackPoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CurrentHealthPoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DefensePoint")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MaxHealthPoint")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

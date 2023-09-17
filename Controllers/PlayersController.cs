@@ -133,20 +133,40 @@ namespace microgame.Controllers
         }
 
         [HttpGet("{id}/attackedby/{enemyId}")]
-        public async Task<ActionResult<Player>> GetAttackedBy(long id, long monsterId)
+        public async Task<ActionResult<String>> GetAttackedBy(long id, long enemyId)
         {
-            if (_context.Players == null)
-            {
-                return NotFound();
-            }
+
             var player = await _context.Players.FindAsync(id);
+            var enemy = await _context.Enemies.FindAsync(enemyId);
 
             if (player == null)
             {
-                return NotFound();
+                return NotFound("Player not found.");
+            }
+            if (enemy == null)
+            {
+                return NotFound("Enemy not found.");
+            }
+            if (player.isDead()) {
+                return NotFound(player.Name+" is dead already.");
             }
 
-            return player;
+            var damage = enemy.AttackPoint - player.getDP();
+            if (damage>0) {
+                player.getAttacked(damage);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine(ex.InnerException?.Message);
+                    return Problem(ex.InnerException?.Message);
+                }
+                return "[+]" + player.Name + " attacked by " + enemy.Name +" Damage: "+damage;
+            } else {
+                return "[+] "+player.Name+" attacked by "+enemy.Name+" : no effect!";
+            }
         }
 
         private bool PlayerExists(long id)

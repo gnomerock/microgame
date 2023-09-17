@@ -1,4 +1,5 @@
 namespace Microgame.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Player 
 {
@@ -10,13 +11,13 @@ public class Player
   }
   public long Id { get; set; }
   public string? Name { get; set;}
-  private int MaxHealthPoint { get; set;}
-  private int CurrentHealthPoint { get; set;}
-  private int AttackPoint { get; set;}
-  private int DefensePoint { get; set;}
+  public int MaxHealthPoint { get; set;}
+  public int CurrentHealthPoint { get; set;}
+  public int AttackPoint { get; set;}
+  public int DefensePoint { get; set;}
 
-  private Equipment? Weapon { get; set;}
-  private Equipment? Armor { get; set;}
+  public Equipment? Weapon { get; set;}
+  public Equipment? Armor { get; set;}
 
   public string getCurrentHP() {
     return Name+" HP: "+CurrentHealthPoint.ToString()+"/"+MaxHealthPoint.ToString()+" AP: "+getAP()+" DP: "+getDP();
@@ -36,6 +37,12 @@ public class Player
     }else{
       return DefensePoint;
     }
+  }
+
+  public void getAttacked(int damage) {
+    CurrentHealthPoint -= damage;
+    if(CurrentHealthPoint<0) CurrentHealthPoint=0;
+    Console.WriteLine("HP:" + CurrentHealthPoint.ToString());
   }
 
   public void equipWeapon(Equipment weapon) {
