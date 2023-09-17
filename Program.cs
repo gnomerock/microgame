@@ -12,6 +12,8 @@ builder.Services.AddDbContext<PlayerContext>(options =>
      options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<EnemyContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<EquipmentContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
     
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
