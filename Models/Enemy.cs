@@ -1,9 +1,10 @@
 namespace Microgame.Models;
 
-public class Player 
+public class Enemy 
 {
-  public long Id { get; set; }
+  public long Id { get; set;}
   public string? Name { get; set;}
+
   public int MaxHealthPoint { get; set;}
   public int CurrentHealthPoint { get; set;}
   public int AttackPoint { get; set;}
