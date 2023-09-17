@@ -115,6 +115,23 @@ namespace microgame.Controllers
             return NoContent();
         }
 
+        [HttpGet("{id}/status")]
+        public async Task<ActionResult<string>> GetPlayerStatus(long id)
+        {
+            if (_context.Players == null)
+            {
+                return NotFound();
+            }
+            var player = await _context.Players.FindAsync(id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return player.getCurrentHP();
+        }
+
         private bool PlayerExists(long id)
         {
             return (_context.Players?.Any(e => e.Id == id)).GetValueOrDefault();
