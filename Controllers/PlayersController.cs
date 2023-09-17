@@ -195,8 +195,6 @@ namespace microgame.Controllers
                 return NotFound("Equipment not found.");
             }
 
-            var damage = equipment.AttackPoint - player.getDP();
-
             player.equipWeapon(equipment);
             try
             {
@@ -208,6 +206,35 @@ namespace microgame.Controllers
                 return Problem(ex.InnerException?.Message);
             }
             return "[+]" + player.Name + " equip " + equipment.Name + " Current AP: " + player.getAP();
+        }
+
+        [HttpGet("{id}/equiparmor/{equipmentId}")]
+        public async Task<ActionResult<String>> EquipArmor(long id, long equipmentId)
+        {
+
+            var player = await _context.Players.FindAsync(id);
+            var equipment = await _context.Equipments.FindAsync(equipmentId);
+
+            if (player == null)
+            {
+                return NotFound("Player not found.");
+            }
+            if (equipment == null)
+            {
+                return NotFound("Equipment not found.");
+            }
+
+            player.equipArmor(equipment);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.InnerException?.Message);
+                return Problem(ex.InnerException?.Message);
+            }
+            return "[+]" + player.Name + " equip " + equipment.Name + " Current DP: " + player.getDP();
         }
 
         private bool PlayerExists(long id)
