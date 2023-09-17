@@ -6,9 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddDbContext<PlayerContext>(opt =>
-    opt.UseInMemoryDatabase("Microgame"));
+
+//sqlite 
+builder.Services.AddDbContext<PlayerContext>(options =>
+     options.UseSqlite("Data Source=microgame.db"));
+builder.Services.AddDbContext<EnemyContext>(options =>
+    options.UseSqlite("Data Source=microgame.db"));
+    
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
