@@ -6,3 +6,8 @@
 
 # scaffolding controllers sample
 `dotnet aspnet-codegenerator controller -name PlayersController -async -api -m Player -dc PlayerContext -outDir Controllers`
+
+# initial&migrate db
+1. `dotnet tool install --global dotnet-ef`
+2. `dotnet ef migrations add InitialCreate --context [contextname]`
+3. `dotnet ef database update --context [contextname]`

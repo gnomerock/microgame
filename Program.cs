@@ -9,9 +9,9 @@ builder.Services.AddControllers();
 
 //sqlite 
 builder.Services.AddDbContext<PlayerContext>(options =>
-     options.UseSqlite("Data Source=microgame.db"));
+     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<EnemyContext>(options =>
-    options.UseSqlite("Data Source=microgame.db"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
     
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
