@@ -9,5 +9,5 @@ public class PlayerContext : DbContext
     {
     }
 
-    public DbSet<Player> Players { get; set; }
+    public DbSet<PlayerContext> Players { get; set; } = null!;
 }
